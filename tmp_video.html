@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="utf-8"><title>Inspeccionar video</title></head>
+<body>
+<video id="v" src="../../../Downloads/videoTiktok.mp4" controls playsinline preload="metadata"></video>
+<pre id="r">...</pre>
+<script>
+const v = document.getElementById('v');
+v.addEventListener('loadedmetadata', function () {
+  document.getElementById('r').textContent = JSON.stringify({
+    duration: v.duration, w: v.videoWidth, h: v.videoHeight,
+    mp4rec: typeof MediaRecorder !== 'undefined' && MediaRecorder.isTypeSupported('video/mp4'),
+    webm9: typeof MediaRecorder !== 'undefined' && MediaRecorder.isTypeSupported('video/webm;codecs=vp9,opus'),
+    webm8: typeof MediaRecorder !== 'undefined' && MediaRecorder.isTypeSupported('video/webm;codecs=vp8,opus')
+  });
+});
+v.addEventListener('error', function () {
+  document.getElementById('r').textContent = JSON.stringify({error: v.error && v.error.message, code: v.error && v.error.code});
+});
+</script>
+</body>
+</html>

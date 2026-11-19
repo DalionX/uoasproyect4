@@ -1,0 +1,214 @@
+<!DOCTYPE html> <!-- L1: declara que el documento usa HTML5 -->
+<html lang="es"> <!-- L2: idioma principal del contenido -->
+<head> <!-- L3: metadatos, no se muestran en la página -->
+  <meta charset="UTF-8"> <!-- L4: codificación de caracteres para tildes y eñes -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- L5: hace el diseño adaptable al celular -->
+  <title>Nosotros | UOAS</title> <!-- L6: título de la pestaña del navegador -->
+  <meta name="description" content="Copia de estudio de la sección Nosotros de UOAS."> <!-- L7: descripción para buscadores -->
+  <link rel="icon" href="assets/img/logo-uoas.svg" type="image/svg+xml"> <!-- L8: icono SVG original del clon -->
+  <link rel="stylesheet" href="assets/css/styles.css"> <!-- L9: carga la hoja de estilos compartida -->
+</head> <!-- L10: cierra la cabecera -->
+<body data-page="nosotros"> <!-- L11: identifica la página para resaltar el menú -->
+
+  <!-- L12: BARRA SUPERIOR fija, reproduce el header sticky de 80px -->
+  <header class="site-header" id="site-header"> <!-- L13: contenedor semántico de la cabecera -->
+    <div class="container header-inner"> <!-- L14: ancho máximo y centrado -->
+      <a class="brand" href="index.html" aria-label="Inicio UOAS"> <!-- L15: enlace de la marca a la portada -->
+        <img src="assets/img/logo-uoas.svg" alt="Unión de Obras de Asistencia Social" width="396" height="164"> <!-- L16: logo vectorial original -->
+      </a> <!-- L17: cierra la marca -->
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Abrir menú"> <!-- L18: botón de hamburguesa para móvil -->
+        <span></span><span></span><span></span> <!-- L19: tres líneas del icono -->
+      </button> <!-- L20: cierra el botón -->
+      <nav class="main-nav" id="main-nav" aria-label="Menú principal"> <!-- L21: navegación principal -->
+        <ul class="menu"> <!-- L22: lista de enlaces del menú -->
+          <li><a href="index.html" data-page-link="inicio">Inicio</a></li> <!-- L23: enlace a la portada -->
+          <li><a href="nosotros.html" data-page-link="nosotros">Nosotros</a></li> <!-- L24: enlace a esta página -->
+          <li class="has-submenu"> <!-- L25: ítem con submenú desplegable -->
+            <button class="submenu-toggle" type="button" aria-expanded="false">Sedes <span aria-hidden="true">▾</span></button> <!-- L26: botón que abre el desplegable -->
+            <ul class="submenu"> <!-- L27: lista de sedes -->
+              <li><a href="sede-escuela-hogar-ancon-de-ninas.html" data-page-link="sede-ninas">Escuela Hogar Ancón de Niñas</a></li> <!-- L28: sede 1 -->
+              <li><a href="sede-escuela-hogar-ancon-de-ninos.html" data-page-link="sede-ninos">Escuela Hogar Ancón de Niños</a></li> <!-- L29: sede 2 -->
+              <li><a href="sede-hogar-transitorio-san-luis.html" data-page-link="sede-san-luis">Hogar Transitorio San Luis</a></li> <!-- L30: sede 3 -->
+              <li><a href="sede-cuna-jardin-san-francisco.html" data-page-link="sede-san-francisco">Cuna Jardín San Francisco</a></li> <!-- L31: sede 4 -->
+              <li><a href="sede-cuna-jardin-santa-rosa-04.html" data-page-link="sede-santa-rosa">Cuna Jardin Santa Rosa 04</a></li> <!-- L32: sede 5 -->
+              <li><a href="sede-nido-aurora.html" data-page-link="sede-nido">Nido Aurora</a></li> <!-- L33: sede 6 -->
+              <li><a href="sede-centro-de-atencion-integral-aurora.html" data-page-link="sede-integral">Centro de Atención Integral Aurora</a></li> <!-- L34: sede 7 -->
+            </ul> <!-- L35: cierra el submenú -->
+          </li> <!-- L36: cierra el ítem Sedes -->
+          <li><a href="alianzas.html" data-page-link="alianzas">Alianzas</a></li> <!-- L37: enlace a alianzas -->
+          <li><a href="como-ayudar.html" data-page-link="como-ayudar">Cómo Ayudar</a></li> <!-- L38: enlace a cómo ayudar -->
+          <li><a href="galeria.html" data-page-link="galeria">Galería</a></li> <!-- L39: enlace a galería -->
+          <li><a href="contacto.html" data-page-link="contacto">Contacto</a></li> <!-- L40: enlace a contacto -->
+        </ul> <!-- L41: cierra la lista del menú -->
+      </nav> <!-- L42: cierra la navegación -->
+    </div> <!-- L43: cierra el contenedor -->
+  </header> <!-- L44: cierra la cabecera -->
+
+  <main> <!-- L45: inicia el contenido principal de la página -->
+    <section class="page-hero"> <!-- L46: cabecera azul con título y resumen -->
+      <div class="container"> <!-- L47: contenido centrado -->
+        <div class="breadcrumb"><a href="index.html">Inicio</a> / Nosotros</div> <!-- L48: migas de pan -->
+        <h1>Unión de Obras de Asistencia Social</h1> <!-- L49: título de la página -->
+        <p>Institución privada peruana sin fines de lucro que, desde 1934, trabaja por la niñez y las familias en situación de vulnerabilidad.</p> <!-- L50: resumen tomado de la página original -->
+        <img class="page-hero-logo" src="assets/img/logo-uoas-blanco.svg" alt="" width="595" height="330"> <!-- L51: logo decorativo translúcido -->
+      </div> <!-- L52: cierra el contenedor -->
+    </section> <!-- L53: cierra la cabecera azul -->
+
+    <section class="section"> <!-- L54: presentación con foto y texto -->
+      <div class="container intro-grid"> <!-- L55: rejilla de dos columnas -->
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1000&q=80" alt="Docente acompañando a niños"> <!-- L56: foto libre de Unsplash -->
+        <div class="intro-copy"> <!-- L57: columna de texto -->
+          <h3>Quiénes somos</h3> <!-- L58: subtítulo -->
+          <p>Somos una institución privada, peruana y sin fines de lucro. Nuestro trabajo se desarrolla en varias sedes y se centra en la atención integral de niñas, niños y sus familias.</p> <!-- L59: párrafo adaptado del original -->
+          <p>Combinamos educación, salud, acompañamiento social y espiritualidad para promover el bienestar y el desarrollo de quienes más lo necesitan.</p> <!-- L60: segundo párrafo -->
+        </div> <!-- L61: cierra la columna de texto -->
+      </div> <!-- L62: cierra la rejilla -->
+    </section> <!-- L63: cierra la presentación -->
+
+    <section class="section section--gray"> <!-- L64: historia institucional -->
+      <div class="container"> <!-- L65: contenedor general -->
+        <div class="section-head"> <!-- L66: cabecera de la sección -->
+          <h2>Nuestra historia</h2> <!-- L67: título -->
+          <p>La obra nació por iniciativa de la primera dama de la Nación, Francisca Benavides, y de un grupo de damas voluntarias.</p> <!-- L68: resumen histórico -->
+        </div> <!-- L69: cierra la cabecera -->
+        <div class="text-columns"> <!-- L70: texto a dos columnas -->
+          <p>En 1934 la institución empezó su labor atendiendo a la infancia desvalida y a personas con tuberculosis pulmonar. Con el tiempo amplió sus servicios para responder a nuevas necesidades sociales.</p> <!-- L71: primer párrafo histórico -->
+          <p>Su intervención se fundamenta en el enfoque de desarrollo humano: la persona es sujeto y objeto principal de la acción, con derecho a desplegar sus capacidades.</p> <!-- L72: segundo párrafo histórico -->
+          <p>Actualmente cuenta con alianzas públicas y privadas que complementan la atención gratuita en salud y educación, además de un equipo multidisciplinario.</p> <!-- L73: tercer párrafo histórico -->
+          <p>Contamos con sedes en Ancón, Chorrillos, La Perla y Miraflores, y renovamos periódicamente nuestros objetivos e indicadores de logro.</p> <!-- L74: cuarto párrafo histórico -->
+        </div> <!-- L75: cierra las columnas -->
+      </div> <!-- L76: cierra el contenedor -->
+    </section> <!-- L77: cierra la historia -->
+
+    <section class="section"> <!-- L78: misión, visión y valores -->
+      <div class="container"> <!-- L79: contenedor general -->
+        <div class="section-head"> <!-- L80: cabecera -->
+          <h2>Misión, visión y valores</h2> <!-- L81: título -->
+          <p>Los tres ejes que orientan la gestión institucional y el trabajo diario en cada sede.</p> <!-- L82: presentación -->
+        </div> <!-- L83: cierra la cabecera -->
+        <div class="feature-grid"> <!-- L84: rejilla de tres tarjetas -->
+          <article class="feature-card"> <!-- L85: tarjeta de misión -->
+            <div class="feature-icon">M</div> <!-- L86: icono con la inicial -->
+            <h3>Misión</h3> <!-- L87: título -->
+            <p>Atender a niños de familias vulnerables con educación, salud, nutrición y acompañamiento espiritual basado en valores.</p> <!-- L88: texto -->
+          </article> <!-- L89: cierra tarjeta -->
+          <article class="feature-card"> <!-- L90: tarjeta de visión -->
+            <div class="feature-icon">V</div> <!-- L91: icono con la inicial -->
+            <h3>Visión</h3> <!-- L92: título -->
+            <p>Ser una institución reconocida por su solidaridad y por elevar la calidad de vida de los sectores menos favorecidos.</p> <!-- L93: texto -->
+          </article> <!-- L94: cierra tarjeta -->
+          <article class="feature-card"> <!-- L95: tarjeta de valores -->
+            <div class="feature-icon">R</div> <!-- L96: icono con la inicial -->
+            <h3>Valores</h3> <!-- L97: título -->
+            <p>Responsabilidad, integridad, solidaridad, fraternidad y amor guían nuestra relación con los niños y sus familias.</p> <!-- L98: texto -->
+          </article> <!-- L99: cierra tarjeta -->
+        </div> <!-- L100: cierra la rejilla -->
+      </div> <!-- L101: cierra el contenedor -->
+    </section> <!-- L102: cierra misión, visión y valores -->
+
+    <section class="section section--gray"> <!-- L103: objetivos -->
+      <div class="container"> <!-- L104: contenedor general -->
+        <div class="section-head"> <!-- L105: cabecera -->
+          <h2>Objetivos</h2> <!-- L106: título -->
+          <p>Cuatro compromisos que concreta el trabajo diario de las Sedes y direcciones.</p> <!-- L107: presentación -->
+        </div> <!-- L108: cierra la cabecera -->
+        <div class="feature-grid"> <!-- L109: rejilla de objetivos -->
+          <article class="feature-card"> <!-- L110: objetivo 1 -->
+            <div class="feature-icon">1</div> <!-- L111: numeración -->
+            <h3>Condiciones de vida</h3> <!-- L112: título -->
+            <p>Brindar cuidado, salud física y mental, y una educación integral basada en principios y valores.</p> <!-- L113: texto -->
+          </article> <!-- L114: cierra objetivo 1 -->
+          <article class="feature-card"> <!-- L115: objetivo 2 -->
+            <div class="feature-icon">2</div> <!-- L116: numeración -->
+            <h3>Familias responsables</h3> <!-- L117: título -->
+            <p>Involucrar a padres y apoderados en programas de promoción social y en la crianza responsable.</p> <!-- L118: texto -->
+          </article> <!-- L119: cierra objetivo 2 -->
+          <article class="feature-card"> <!-- L120: objetivo 3 -->
+            <div class="feature-icon">3</div> <!-- L121: numeración -->
+            <h3>Formación continua</h3> <!-- L122: título -->
+            <p>Capacitar al personal para promover entornos saludables y estilos de vida positivos.</p> <!-- L123: texto -->
+          </article> <!-- L124: cierra objetivo 3 -->
+          <article class="feature-card"> <!-- L125: objetivo 4 -->
+            <div class="feature-icon">4</div> <!-- L126: numeración -->
+            <h3>Cooperación</h3> <!-- L127: título -->
+            <p>Trabajar con el Estado y entidades públicas o privadas mediante convenios de cooperación.</p> <!-- L128: texto -->
+          </article> <!-- L129: cierra objetivo 4 -->
+        </div> <!-- L130: cierra la rejilla -->
+      </div> <!-- L131: cierra el contenedor -->
+    </section> <!-- L132: cierra objetivos -->
+
+    <section class="section"> <!-- L133: estructura institucional -->
+      <div class="container"> <!-- L134: contenedor general -->
+        <div class="section-head"> <!-- L135: cabecera -->
+          <h2>Estructura institucional</h2> <!-- L136: título -->
+          <p>Órganos de gobierno y direcciones que hacen posible la misión.</p> <!-- L137: presentación -->
+        </div> <!-- L138: cierra la cabecera -->
+        <div class="info-grid"> <!-- L139: rejilla de bloques -->
+          <div class="info-item"><h3>Asamblea General</h3><p>Órgano supremo integrado por asociados voluntarios que definen la política de la institución.</p></div> <!-- L140: bloque 1 -->
+          <div class="info-item"><h3>Consejo Directivo</h3><p>Órgano de gobierno conformado por presidente, vicepresidente, secretario, tesorero y vocales.</p></div> <!-- L141: bloque 2 -->
+          <div class="info-item"><h3>Administración General</h3><p>Dirige la marcha administrativa y coordina los planes anuales con las sedes.</p></div> <!-- L142: bloque 3 -->
+          <div class="info-item"><h3>Trabajo Social</h3><p>Planifica actividades de salud y asistencia, y supervisa el apoyo a las familias.</p></div> <!-- L143: bloque 4 -->
+          <div class="info-item"><h3>Educación</h3><p>Da seguimiento a las actividades educativas y cumple los convenios con el Ministerio de Educación.</p></div> <!-- L144: bloque 5 -->
+          <div class="info-item"><h3>Psicología</h3><p>Organiza acciones de prevención, promoción e intervención con niños y familias.</p></div> <!-- L145: bloque 6 -->
+        </div> <!-- L146: cierra la rejilla -->
+      </div> <!-- L147: cierra el contenedor -->
+    </section> <!-- L148: cierra estructura -->
+
+    <section class="section section--gray"> <!-- L149: registros -->
+      <div class="container"> <!-- L150: contenedor general -->
+        <div class="section-head"> <!-- L151: cabecera -->
+          <h2>Registros</h2> <!-- L152: título -->
+          <p>Datos formales de la asociación, reproducidos como información pública.</p> <!-- L153: presentación -->
+        </div> <!-- L154: cierra la cabecera -->
+        <div class="info-grid"> <!-- L155: rejilla de registros -->
+          <div class="info-item"><h3>RUC</h3><p>20148000698</p></div> <!-- L156: RUC -->
+          <div class="info-item"><h3>Registros Públicos</h3><p>Partida Registral N.º 03001813, asiento 01, fojas 212, tomo 01.</p></div> <!-- L157: partida -->
+          <div class="info-item"><h3>APCI – IPREDA</h3><p>Registro de instituciones de procedencia extranjera.</p></div> <!-- L158: APCI -->
+          <div class="info-item"><h3>Certificados de donación</h3><p>Resolución de Intendencia N.º 0490050035633, vigencia 2022–2025.</p></div> <!-- L159: donaciones -->
+        </div> <!-- L160: cierra la rejilla -->
+      </div> <!-- L161: cierra el contenedor -->
+    </section> <!-- L162: cierra registros -->
+
+    <section class="cta-band"> <!-- L163: franja final de llamada a la acción -->
+      <div class="container"> <!-- L164: contenedor centrado -->
+        <h2>Conoce nuestras sedes</h2> <!-- L165: título de la franja -->
+        <a href="sede-escuela-hogar-ancon-de-ninas.html">Ver sedes</a> <!-- L166: enlace a la primera sede -->
+      </div> <!-- L167: cierra el contenedor -->
+    </section> <!-- L168: cierra la franja -->
+  </main> <!-- L169: cierra el contenido principal -->
+
+  <!-- L170: PIE DE PÁGINA azul con tres columnas de contacto -->
+  <footer class="site-bottom" id="contacto"> <!-- L171: pie de página -->
+    <div class="container bottom-grid"> <!-- L172: rejilla de contacto -->
+      <div class="bottom-col"> <!-- L173: columna de dirección -->
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg> <!-- L174: icono de ubicación -->
+        <p>Calle Esperanza 250,<br>Miraflores 15074<br>Lima - PERÚ</p> <!-- L175: dirección -->
+      </div> <!-- L176: cierra dirección -->
+      <div class="bottom-col"> <!-- L177: columna de correos -->
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 4h20v16H2V4zm10 9L3.5 6.5v.1L12 13l8.5-6.4V6.5L12 13z"/></svg> <!-- L178: icono de correo -->
+        <p>uniondeobras@uoas.org.pe<br>informes@uoas.org.pe</p> <!-- L179: correos -->
+      </div> <!-- L180: cierra correos -->
+      <div class="bottom-col"> <!-- L181: columna de teléfonos -->
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h4l2 5-2.5 1.5a12 12 0 0 0 6 6L17 12l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 4 4a2 2 0 0 1 2-2z"/></svg> <!-- L182: icono de teléfono -->
+        <p>Secretaría: 719-7998<br>Trabajo Social: 719-7996<br>994 265 577</p> <!-- L183: teléfonos -->
+      </div> <!-- L184: cierra teléfonos -->
+    </div> <!-- L185: cierra la rejilla -->
+    <div class="bottom-bar"> <!-- L186: franja inferior más oscura -->
+      <div class="container bar-inner"> <!-- L187: contenido alineado -->
+        <small>© UNION DE OBRAS DE ASISTENCIA SOCIAL 2026</small> <!-- L188: copyright -->
+        <nav aria-label="Menú del pie"> <!-- L189: menú secundario -->
+          <a href="index.html" data-page-link="inicio">Inicio</a> <!-- L190: enlace -->
+          <a href="nosotros.html" data-page-link="nosotros">Nosotros</a> <!-- L191: enlace -->
+          <a href="sede-escuela-hogar-ancon-de-ninas.html">Sedes</a> <!-- L192: enlace -->
+          <a href="alianzas.html" data-page-link="alianzas">Alianzas</a> <!-- L193: enlace -->
+          <a href="como-ayudar.html" data-page-link="como-ayudar">Cómo Ayudar</a> <!-- L194: enlace -->
+          <a href="galeria.html" data-page-link="galeria">Galería</a> <!-- L195: enlace -->
+          <a href="contacto.html" data-page-link="contacto">Contacto</a> <!-- L196: enlace -->
+        </nav> <!-- L197: cierra el menú del pie -->
+      </div> <!-- L198: cierra el contenido -->
+    </div> <!-- L199: cierra la franja -->
+  </footer> <!-- L200: cierra el pie -->
+
+  <script src="assets/js/main.js"></script> <!-- L201: carga los comportamientos compartidos -->
+</body> <!-- L202: cierra el cuerpo -->
+</html> <!-- L203: cierra el documento -->

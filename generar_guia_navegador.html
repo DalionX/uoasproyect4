@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="utf-8"><title>Generador GUIA_PRINCIPIANTES.pdf</title></head>
+<body>
+<p>Generador alternativo de GUIA_PRINCIPIANTES.pdf con el modelo visual del PDF de referencia.</p>
+<button id="descargar" type="button">Descargar PDF</button>
+<script>
+/* Puerto a JavaScript de generar_guia_principiantes.py; conserva paleta, fuentes, margenes y tablas. */
+const NL = "\n";
+const BS = "\\";
+const C = {
+  navy: ".070588 .192157 .352941",
+  blue: ".113725 .305882 .537255",
+  black: "0 0 0",
+  violet: ".541176 .168627 .886275",
+  white: "1 1 1",
+  zebra: ".956863 .968627 .984314",
+  border: ".721569 .768627 .839216"
+};
+const F = { cuerpo: "/F1", titulo: "/F2", codigo: "/F3" };
+const X = 56.69291;
+const ANCHO = 481.8898;
+const ALTO = 790;
+
+function esc(s) {
+  return s.split("\\").join("\\\\").split("(").join("\\(").split(")").join("\\)");
+}
+
+function wrap(s, n) {
+  const salida = [];
+  let actual = "";
+  for (const palabra of s.split(" ")) {
+    const candidata = (actual + " " + palabra).trim();
+    if (candidata.length > n && actual) {
+      salida.push(actual);
+      actual = palabra;
+    } else {
+      actual = candidata;
+    }
+  }
+  if (actual) salida.push(actual);
+  return salida;
+}
+
+class Pagina {
+  constructor() { this.comandos = []; this.y = ALTO; }
+  texto(color, fuente, size, x, y, s) {
+    this.comandos.push(color + " rg " + fuente + " " + size + " Tf 1 0 0 1 " + x + " " + y + " Tm (" + esc(s) + ") Tj");
+  }
+  titulo(s) { this.texto(C.navy, F.titulo, 20, X, this.y, s); this.y -= 30; }
+  seccion(s) { this.y -= 12; this.texto(C.blue, F.titulo, 14, X, this.y, s); this.y -= 24; }
+  cuerpo(s) {
+    for (const linea of wrap(s, 95)) { this.texto(C.black, F.cuerpo, 9.5, X + 13, this.y, linea); this.y -= 13; }
+    this.y -= 4;
+  }
+  lista(s, numero) {
+    const marca = numero ? numero + "." : BS + "225";
+    this.texto(C.black, F.cuerpo, 9.5, X, this.y, marca);
+    const lineas = wrap(s, 88);
+    lineas.forEach((linea, i) => this.texto(C.black, F.cuerpo, 9.5, X + 13, this.y - i * 13, linea));
+    this.y -= 13 * lineas.length + 3;
+  }
+  tabla(cabeceras, filas, anchos, columnasCodigo) {
+    const codigo = columnasCodigo || [];
+    const x = X, altoCabecera = 16, total = ANCHO, top = this.y;
+    this.comandos.push(C.blue + " rg " + x + " " + this.y + " " + total + " " + altoCabecera + " re f");
+    let cx = x + 6;
+    cabeceras.forEach((cabecera, i) => {
+      this.texto(C.white, F.titulo, 8, cx, this.y + 5, cabecera);
+      cx += anchos[i];
+    });
+    this.y -= altoCabecera;
+    const separadores = [this.y];
+    filas.forEach((fila, r) => {
+      const celdas = fila.map((valor, i) => wrap(String(valor), Math.max(1, Math.floor(anchos[i] / 4.3))));
+      const nlineas = Math.max.apply(null, celdas.map(c => c.length));
+      const alto = Math.max(16, 8 + nlineas * 10);
+      const fondo = r % 2 ? C.zebra : C.white;
+      this.comandos.push(fondo + " rg " + x + " " + (this.y - alto) + " " + total + " " + alto + " re f");
+      let cc = x + 6;
+      celdas.forEach((celda, i) => {
+        const color = codigo.indexOf(i) >= 0 ? C.violet : C.black;
+        const fuente = codigo.indexOf(i) >= 0 ? F.codigo : F.cuerpo;
+        celda.forEach((linea, k) => this.texto(color, fuente, 8, cc, this.y - 9 - k * 10, linea));
+        cc += anchos[i];
+      });
+      this.y -= alto;
+      separadores.push(this.y);
+    });
+    this.comandos.push(C.border + " RG .4 w " + x + " " + this.y + " " + total + " " + (top - this.y) + " re S");
+    separadores.slice(1, -1).forEach(sy => this.comandos.push(C.border + " RG .4 w " + x + " " + sy + " m " + (x + total) + " " + sy + " l S"));
+    let cx2 = x;
+    anchos.slice(0, -1).forEach(ancho => {
+      cx2 += ancho;
+      this.comandos.push(C.border + " RG .4 w " + cx2 + " " + this.y + " m " + cx2 + " " + top + " l S");
+    });
+    this.y -= 14;
+  }
+}
+
+function construirPaginas() {
+  const paginas = [];
+
+  let p = new Pagina();
+  p.titulo("GUIA PARA PRINCIPIANTES - CLON UOAS");
+  p.cuerpo("Documento para alguien que nunca ha tocado codigo. Explica cada pagina, cada imagen y cada parte sin suponer conocimientos previos.");
+  p.seccion("1. Tres capas que trabajan juntas");
+  p.tabla(["Capa", "Archivo", "Que hace y analogia"], [
+    ["HTML", "index.html + 12 paginas", "Coloca textos, fotos y botones. Son los ladrillos y muebles."],
+    ["CSS", "assets/css/styles.css", "Da colores, tamanos y posiciones. Es la pintura y decoracion."],
+    ["JavaScript", "assets/js/main.js", "Anade movimiento: sliders, menu y modal. Son los interruptores."]
+  ], [70, 150, 261.89], [1]);
+  p.cuerpo("Una etiqueta HTML abre y cierra un contenido: <h1>Nosotros</h1>. Una class es como una etiqueta de ropa: el CSS la mira y la viste.");
+  p.cuerpo("Los comentarios Lxx son anotaciones documentales. No siempre coinciden con el numero de linea del editor; sirven para localizar la explicacion.");
+  p.seccion("2. Como abrir el proyecto");
+  p.lista("Para ver diseno y video vertical: doble clic en index.html.", 1);
+  p.lista("Para los videos de YouTube: doble clic en INICIAR_SERVIDOR.bat; abre http://localhost:8000.", 2);
+  p.lista("El error 153 con file:// se debe al referidor; no es un problema de derechos.", 3);
+  p.seccion("3. Mapa de archivos entregados");
+  p.tabla(["Archivo", "Tipo", "Para que sirve"], [
+    ["INICIAR_SERVIDOR.bat", "BAT", "Un clic para abrir el sitio con origen http."],
+    ["servir_local.py / .js", "PY/JS", "Servidor minimo usado por el .bat cuando no hay Live Server."],
+    ["index.html", "HTML", "Portada: 7 slides, aniversario, videos, mision, historia y pie."],
+    ["nosotros.html", "HTML", "Historia, mision, vision, valores, objetivos y registros."],
+    ["sede-*.html (7)", "HTML", "Una ficha por centro con servicios y enlace a contacto."],
+    ["alianzas.html", "HTML", "Convenios, entidades aliadas y formas de sumarse."],
+    ["como-ayudar.html", "HTML", "Voluntariado, donaciones, auspicio y requisitos."],
+    ["galeria.html", "HTML", "Siete albumes con visor modal de imagenes."],
+    ["contacto.html", "HTML", "Datos y formulario de demostracion local."],
+    ["assets/css/styles.css", "CSS", "Paleta, rejillas y media queries. 1118 anotaciones L."],
+    ["assets/js/main.js", "JS", "Menu, sliders, videos en linea, API de YouTube y galeria. 227 lineas."],
+    ["assets/img/*.svg", "SVG", "Dos logos originales para cabecera y cabecera azul."],
+    ["GUIA_PRINCIPIANTES.md / .pdf", "DOC", "Esta guia en Markdown y en PDF."],
+    ["generar_guia_*", "UTIL", "Generadores del PDF con el modelo visual obligatorio."]
+  ], [150, 60, 271.89], [0]);
+  paginas.push(p);
+
+  p = new Pagina();
+  p.seccion("4. Portada index.html: partes y anotaciones");
+  p.cuerpo("El hero mide 880px de alto en escritorio. La barra superior se queda fija al desplazarse.");
+  p.tabla(["Lineas L", "Parte de la pagina", "Explicacion sencilla"], [
+    ["L1-L10", "Cabeza del documento", "Idioma, titulo, icono y carga de styles.css."],
+    ["L12-L44", "Barra superior", "Logo, hamburguesa, menu y submenu de Sedes."],
+    ["L45-L109", "Hero", "7 slides: fondo, capa oscura, titulo, circulo y boton Ver mas."],
+    ["L108", "Puntos del slider", "La lista esta vacia; JavaScript crea 7 puntos."],
+    ["L110-L113", "Aniversario", "Titulo centrado de 91 Aniversario."],
+    ["L114-L124", "Videos", "2 tarjetas con portada y boton play; abren YouTube en el modal."],
+    ["L125-L140", "Mision", "Texto a la izquierda y collage de 3 fotos a la derecha."],
+    ["L141-L180", "Historia y sedes", "Texto, slider de 6 fotos y lista de 7 sedes."],
+    ["L181-L211", "Pie", "3 columnas de contacto, menu y copyright."],
+    ["L212-L216", "Modal", "Ventana oculta con imagen, video local e iframe."],
+    ["L217-L219", "Script y cierre", "Carga main.js cuando el HTML ya existe."]
+  ], [70, 150, 261.89], [0]);
+  p.seccion("5. Donde estan las imagenes de la portada");
+  p.cuerpo("Todas las fotos son de images.unsplash.com con ?auto=format&fit=crop&w=ANCHO&q=80. Las fotos fuera de la primera pantalla llevan loading lazy, srcset y sizes.");
+  p.tabla(["Lugar", "Linea L", "Imagen"], [
+    ["Hero 1 fondo / logo", "L49 / L51", "photo-150906... / logo-uoas-blanco.svg"],
+    ["Hero 2 fondo / circulo", "L54 / L58", "photo-150367... / photo-151662..."],
+    ["Hero 3 fondo / circulo", "L63 / L67", "photo-149101... / photo-154477..."],
+    ["Hero 4 fondo / circulo", "L72 / L76", "photo-158058... / photo-150345..."],
+    ["Hero 5 fondo / circulo", "L81 / L85", "photo-157126... / photo-159646..."],
+    ["Hero 6 fondo / circulo", "L90 / L94", "photo-160745... / photo-151662..."],
+    ["Hero 7 fondo / circulo", "L99 / L103", "photo-150906... / photo-154477..."],
+    ["Video 1 y Video 2", "L117 / L120", "photo-149101... / photo-151662..."],
+    ["Mision: 2 fotos + degradado", "L133 / L134 / L137", "photo-150345 / degradado / 154477..."],
+    ["Historia: decorativa", "L149", "photo-158058..."],
+    ["Historia: slider 1 a 6", "L152-L157", "photo-150906, 150367, 149101, 151662, 154477, 150345"]
+  ], [180, 90, 211.89], [1, 2]);
+  paginas.push(p);
+
+  p = new Pagina();
+  p.seccion("6. Las 12 paginas internas, una por una");
+  p.cuerpo("Todas comparten menu (L1-L44), cabecera azul (L46-L53) y pie. Cambia el centro y el data-page de L11, que resalta el enlace activo.");
+  p.tabla(["Pagina", "data-page", "Imagen L56", "Bloque central"], [
+    ["nosotros.html", "nosotros", "photo-150367...", "L54-L162: historia, mision, valores, estructura y registros."],
+    ["sede-ninas", "sede-ninas", "photo-151662...", "L54-L119: presentacion, 6 servicios y 6 datos."],
+    ["sede-ninos", "sede-ninos", "photo-150906...", "Igual que la ficha anterior; cambia nombre y texto."],
+    ["sede-san-luis", "sede-san-luis", "photo-159646...", "Ficha con servicios y datos; CTA a contacto."],
+    ["sede-san-francisco", "sede-san-francisco", "photo-154477...", "Ficha con servicios y datos; CTA a contacto."],
+    ["sede-santa-rosa", "sede-santa-rosa", "photo-160745...", "Ficha con servicios y datos; CTA a contacto."],
+    ["sede-nido", "sede-nido", "photo-158765...", "Ficha con servicios y datos; CTA a contacto."],
+    ["sede-integral", "sede-integral", "photo-157609...", "Ficha con servicios y datos; CTA a contacto."],
+    ["alianzas.html", "alianzas", "Sin fotos", "L54-L123: convenios, alianzas y como sumarse."],
+    ["como-ayudar.html", "como-ayudar", "photo-155902...", "L54-L119: 6 formas de ayuda y requisitos."],
+    ["galeria.html", "galeria", "7 fotos L61-L103", "Albumes; modal y flechas anterior/siguiente abren foto en w=1400."],
+    ["contacto.html", "contacto", "Sin fotos", "L54-L93: datos, formulario y areas."]
+  ], [110, 90, 110, 171.89], [1, 2]);
+  p.seccion("7. Videos: donde estan y que pasa al dar play");
+  p.cuerpo("Hay 3 videos reales y los tres se reproducen en su propio recuadro, sin pantalla superpuesta. Videos 1 y 2: YouTube (mFhIfWReCLU y vIoNbwq3mKM) con internet. Video 3: assets/video/video-03.mp4, vertical 9:16 y local.");
+  p.tabla(["Boton", "Linea L", "Al pulsar"], [
+    ["Video 1", "L118", "Iframe de YouTube que arranca en la tarjeta."],
+    ["Video 2", "L121", "Iframe de YouTube que arranca en la tarjeta."],
+    ["Video de la mision", "L135", "Video vertical en recuadro 9:16; play vuelve al final."]
+  ], [130, 80, 271.89], [1]);
+  p.cuerpo("Credito en el title del iframe, sin texto visible. Los botones desaparecen al reproducir y vuelven al terminar: YouTube usa su API oficial (main.js L81b-L81s). Con file:// sale error 153; ejecuta INICIAR_SERVIDOR.bat. Si falta el video local, main.js L157-L164 prueba Descargas y ofrece elegirlo.");
+  paginas.push(p);
+
+  p = new Pagina();
+  p.seccion("8. CSS y JavaScript: que hace cada zona");
+  p.tabla(["Archivo", "Lineas L", "Funcion"], [
+    ["styles.css", "L1-L11", "Variables de color: azul, gris y naranja."],
+    ["styles.css", "L12-L180", "Contenedor, header, menu y submenu."],
+    ["styles.css", "L181-L525", "Hero, videos, mision, historia, pie y modal."],
+    ["styles.css", "L526-L627", "Media queries de la portada."],
+    ["styles.css", "L628-L1058", "Paginas internas, accesibilidad y reproductores."],
+    ["main.js", "L1-L40", "Menu movil y desplegable de Sedes."],
+    ["main.js", "L41-L77", "Dos sliders con flechas, puntos y autoplay."],
+    ["main.js", "L78-L101", "Modal con iframe, video local o imagen."],
+    ["main.js", "L102-L118", "Menu activo y visor de galeria."],
+    ["main.js", "L119-L135", "Validacion del formulario."],
+    ["main.js", "L136-L167", "Pausa de sliders, flechas y video local."],
+    ["styles.css", "L997-L1058", "Accesibilidad, reproductores y flechas."]
+  ], [100, 140, 241.89], [0]);
+  p.seccion("9. Como modificar sin romper nada");
+  p.tabla(["Quieres cambiar", "Ve a"], [
+    ["Un color", "styles.css L1-L11"],
+    ["El titulo de una pagina", "El h1 cerca de L49 de esa pagina"],
+    ["Una foto", "La linea L indicada en las tablas anteriores"],
+    ["La velocidad del slider", "index.html L46 (5000) y L150 (4000)"],
+    ["El menu", "index.html L23-L40 y el pie L201-L207"],
+    ["El formulario", "contacto.html L64-L74 y main.js L119-L135"],
+    ["El resaltado activo", "main.js L102-L108 con data-page y data-page-link"]
+  ], [200, 281.89], [1]);
+  p.seccion("10. Programas y herramientas");
+  p.tabla(["Herramienta", "Para que sirvio", "Alternativa"], [
+    ["OpenCode + Chromium", "Ver el original, DOM y estilos; probar el clon.", "DevTools F12"],
+    ["webfetch", "Descargar HTML y CSS originales.", "curl / navegador"],
+    ["VS Code", "Editar HTML, CSS y JS.", "Notepad++"],
+    ["HTML5 / CSS3 / JS", "Estructura, diseno y comportamiento.", "-"],
+    ["SVG / Unsplash", "Logos propios y fotos libres.", "Inkscape / Pexels"],
+    ["Python / navegador", "Generar los dos PDF.", "jsPDF"],
+    ["GitHub Pages", "Publicar el proyecto (opcional).", "Netlify"]
+  ], [130, 231.89, 120], [1]);
+  p.seccion("11. Generar los PDF y aviso");
+  p.cuerpo("Forma normal: python generar_documento.py y python generar_guia_principiantes.py. Si Python esta bloqueado, abre generar_pdf_navegador.html y generar_guia_navegador.html y pulsa Descargar PDF. Verifica con verificar_pdf.html.");
+  p.cuerpo("Este clon es de estudio. No copia fotos ni logos originales. Usa Unsplash y SVG propios. Los dos videos de YouTube se usan con derechos de la institucion y el vertical es un archivo local aportado. Algunas paginas de origen estaban truncadas.");
+  paginas.push(p);
+  return paginas;
+}
+
+function construirPdf(paginas) {
+  const objetos = [];
+  function add(s) { objetos.push(s); return objetos.length; }
+  add("<< /Type /Catalog /Pages 2 0 R >>");
+  add("<< /Type /Pages /Kids [] /Count 0 >>");
+  add("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>");
+  add("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>");
+  add("<< /Type /Font /Subtype /Type1 /BaseFont /Courier /Encoding /WinAnsiEncoding >>");
+  const numeros = [];
+  for (const pagina of paginas) {
+    const contenido = pagina.comandos.join(NL) + NL;
+    const nc = add("<< /Length " + contenido.length + " >>" + NL + "stream" + NL + contenido + "endstream");
+    const np = add("<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.2756 841.8898] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents " + nc + " 0 R >>");
+    numeros.push(np);
+  }
+  objetos[1] = "<< /Type /Pages /Kids [" + numeros.map(n => n + " 0 R").join(" ") + "] /Count " + numeros.length + " >>";
+  let pdf = "%PDF-1.4" + NL;
+  const off = [0];
+  objetos.forEach((obj, i) => {
+    off.push(pdf.length);
+    pdf += (i + 1) + " 0 obj" + NL + obj + NL + "endobj" + NL;
+  });
+  const xref = pdf.length;
+  pdf += "xref" + NL + "0 " + (objetos.length + 1) + NL + "0000000000 65535 f " + NL;
+  off.slice(1).forEach(o => { pdf += String(o).padStart(10, "0") + " 00000 n " + NL; });
+  pdf += "trailer" + NL + "<< /Size " + (objetos.length + 1) + " /Root 1 0 R >>" + NL + "startxref" + NL + xref + NL + "%%EOF";
+  return pdf;
+}
+
+window.generarGuiaPDF = function () { return construirPdf(construirPaginas()); };
+document.getElementById("descargar").addEventListener("click", function () {
+  const blob = new Blob([window.generarGuiaPDF()], { type: "application/pdf" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "GUIA_PRINCIPIANTES.pdf";
+  a.click();
+  URL.revokeObjectURL(a.href);
+});
+</script>
+</body>
+</html>

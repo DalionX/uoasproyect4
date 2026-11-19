@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="utf-8"><title>Subir video</title></head>
+<body>
+<input id="archivo" type="file">
+<pre id="salida">Esperando...</pre>
+<script>
+document.getElementById('archivo').addEventListener('change', async function () {
+  const f = this.files[0];
+  if (!f) return;
+  const buf = await f.arrayBuffer();
+  const bytes = new Uint8Array(buf);
+  let binario = '';
+  for (let i = 0; i < bytes.length; i += 8192) {
+    binario += String.fromCharCode.apply(null, bytes.subarray(i, i + 8192));
+  }
+  document.getElementById('salida').textContent = JSON.stringify({
+    nombre: f.name,
+    type: f.type,
+    size: f.size,
+    base64: btoa(binario)
+  });
+});
+</script>
+</body>
+</html>

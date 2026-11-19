@@ -1,0 +1,136 @@
+<!DOCTYPE html> <!-- L1: declara que el documento usa HTML5 -->
+<html lang="es"> <!-- L2: idioma principal del contenido -->
+<head> <!-- L3: metadatos, no se muestran en la página -->
+  <meta charset="UTF-8"> <!-- L4: codificación de caracteres para tildes y eñes -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- L5: hace el diseño adaptable al celular -->
+  <title>Contacto | UOAS</title> <!-- L6: título de la pestaña del navegador -->
+  <meta name="description" content="Copia de estudio de la sección Contacto de UOAS."> <!-- L7: descripción para buscadores -->
+  <link rel="icon" href="assets/img/logo-uoas.svg" type="image/svg+xml"> <!-- L8: icono SVG original del clon -->
+  <link rel="stylesheet" href="assets/css/styles.css"> <!-- L9: carga la hoja de estilos compartida -->
+</head> <!-- L10: cierra la cabecera -->
+<body data-page="contacto"> <!-- L11: identifica la página para resaltar el menú -->
+
+  <!-- L12: BARRA SUPERIOR fija, reproduce el header sticky de 80px -->
+  <header class="site-header" id="site-header"> <!-- L13: contenedor semántico de la cabecera -->
+    <div class="container header-inner"> <!-- L14: ancho máximo y centrado -->
+      <a class="brand" href="index.html" aria-label="Inicio UOAS"> <!-- L15: enlace de la marca a la portada -->
+        <img src="assets/img/logo-uoas.svg" alt="Unión de Obras de Asistencia Social" width="396" height="164"> <!-- L16: logo vectorial original -->
+      </a> <!-- L17: cierra la marca -->
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Abrir menú"> <!-- L18: botón de hamburguesa para móvil -->
+        <span></span><span></span><span></span> <!-- L19: tres líneas del icono -->
+      </button> <!-- L20: cierra el botón -->
+      <nav class="main-nav" id="main-nav" aria-label="Menú principal"> <!-- L21: navegación principal -->
+        <ul class="menu"> <!-- L22: lista de enlaces del menú -->
+          <li><a href="index.html" data-page-link="inicio">Inicio</a></li> <!-- L23: enlace a la portada -->
+          <li><a href="nosotros.html" data-page-link="nosotros">Nosotros</a></li> <!-- L24: enlace a nosotros -->
+          <li class="has-submenu"> <!-- L25: ítem con submenú desplegable -->
+            <button class="submenu-toggle" type="button" aria-expanded="false">Sedes <span aria-hidden="true">▾</span></button> <!-- L26: botón que abre el desplegable -->
+            <ul class="submenu"> <!-- L27: lista de sedes -->
+              <li><a href="sede-escuela-hogar-ancon-de-ninas.html" data-page-link="sede-ninas">Escuela Hogar Ancón de Niñas</a></li> <!-- L28: sede 1 -->
+              <li><a href="sede-escuela-hogar-ancon-de-ninos.html" data-page-link="sede-ninos">Escuela Hogar Ancón de Niños</a></li> <!-- L29: sede 2 -->
+              <li><a href="sede-hogar-transitorio-san-luis.html" data-page-link="sede-san-luis">Hogar Transitorio San Luis</a></li> <!-- L30: sede 3 -->
+              <li><a href="sede-cuna-jardin-san-francisco.html" data-page-link="sede-san-francisco">Cuna Jardín San Francisco</a></li> <!-- L31: sede 4 -->
+              <li><a href="sede-cuna-jardin-santa-rosa-04.html" data-page-link="sede-santa-rosa">Cuna Jardin Santa Rosa 04</a></li> <!-- L32: sede 5 -->
+              <li><a href="sede-nido-aurora.html" data-page-link="sede-nido">Nido Aurora</a></li> <!-- L33: sede 6 -->
+              <li><a href="sede-centro-de-atencion-integral-aurora.html" data-page-link="sede-integral">Centro de Atención Integral Aurora</a></li> <!-- L34: sede 7 -->
+            </ul> <!-- L35: cierra el submenú -->
+          </li> <!-- L36: cierra el ítem Sedes -->
+          <li><a href="alianzas.html" data-page-link="alianzas">Alianzas</a></li> <!-- L37: enlace a alianzas -->
+          <li><a href="como-ayudar.html" data-page-link="como-ayudar">Cómo Ayudar</a></li> <!-- L38: enlace a cómo ayudar -->
+          <li><a href="galeria.html" data-page-link="galeria">Galería</a></li> <!-- L39: enlace a galería -->
+          <li><a href="contacto.html" data-page-link="contacto">Contacto</a></li> <!-- L40: enlace a esta página -->
+        </ul> <!-- L41: cierra la lista del menú -->
+      </nav> <!-- L42: cierra la navegación -->
+    </div> <!-- L43: cierra el contenedor -->
+  </header> <!-- L44: cierra la cabecera -->
+
+  <main> <!-- L45: inicia el contenido principal de la página -->
+    <section class="page-hero"> <!-- L46: cabecera azul con título y resumen -->
+      <div class="container"> <!-- L47: contenido centrado -->
+        <div class="breadcrumb"><a href="index.html">Inicio</a> / Contacto</div> <!-- L48: migas de pan -->
+        <h1>Contáctenos</h1> <!-- L49: título de la página -->
+        <p>Sitio web, correos, dirección y teléfonos de la Unión de Obras de Asistencia Social.</p> <!-- L50: resumen tomado del original -->
+        <img class="page-hero-logo" src="assets/img/logo-uoas-blanco.svg" alt="" width="595" height="330"> <!-- L51: logo decorativo translúcido -->
+      </div> <!-- L52: cierra el contenedor -->
+    </section> <!-- L53: cierra la cabecera azul -->
+
+    <section class="section"> <!-- L54: datos de contacto y formulario -->
+      <div class="container contact-grid"> <!-- L55: rejilla de dos columnas -->
+        <div class="contact-details"> <!-- L56: columna de datos institucionales -->
+          <div class="contact-detail"><span class="contact-dot">Web</span><div><h3>Sitio web</h3><p>https://www.uoas.org.pe</p></div></div> <!-- L57: sitio web -->
+          <div class="contact-detail"><span class="contact-dot">@</span><div><h3>Correos</h3><p>uniondeobras@uoas.org.pe<br>informes@uoas.org.pe</p></div></div> <!-- L58: correos -->
+          <div class="contact-detail"><span class="contact-dot">Dir</span><div><h3>Dirección</h3><p>Calle Esperanza 250, Miraflores<br>Lima - Perú</p></div></div> <!-- L59: dirección -->
+          <div class="contact-detail"><span class="contact-dot">Tel</span><div><h3>Teléfonos</h3><p>Secretaría: 719-7998<br>Trabajo Social: 719-7996<br>994 265 577</p></div></div> <!-- L60: teléfonos -->
+        </div> <!-- L61: cierra los datos -->
+
+        <form class="form-card" id="contact-form"> <!-- L62: formulario demostrativo, no envía a un servidor -->
+          <div class="section-head"> <!-- L63: cabecera del formulario -->
+            <h2>Envíanos un mensaje</h2> <!-- L64: título -->
+            <p>Completa los campos; el navegador validará los datos antes de confirmar.</p> <!-- L65: instrucción -->
+          </div> <!-- L66: cierra la cabecera -->
+          <div class="form-row"> <!-- L67: fila de dos campos -->
+            <div class="field"><label for="nombre">Nombre</label><input id="nombre" name="nombre" type="text" required></div> <!-- L68: campo nombre obligatorio -->
+            <div class="field"><label for="correo">Correo electrónico</label><input id="correo" name="correo" type="email" required></div> <!-- L69: campo correo obligatorio -->
+          </div> <!-- L70: cierra la fila -->
+          <div class="field"><label for="asunto">Asunto</label><select id="asunto" name="asunto"><option>Voluntariado</option><option>Donaciones</option><option>Alianzas</option><option>Consulta general</option></select></div> <!-- L71: lista desplegable -->
+          <div class="field"><label for="mensaje">Mensaje</label><textarea id="mensaje" name="mensaje" required></textarea></div> <!-- L72: área de texto obligatoria -->
+          <button class="btn-submit" type="submit">Enviar mensaje</button> <!-- L73: botón de envío -->
+          <div class="form-message" id="form-message" role="status"></div> <!-- L74: aviso que muestra JavaScript -->
+        </form> <!-- L75: cierra el formulario -->
+      </div> <!-- L76: cierra la rejilla -->
+    </section> <!-- L77: cierra datos y formulario -->
+
+    <section class="section section--gray"> <!-- L78: áreas de la institución -->
+      <div class="container"> <!-- L79: contenedor general -->
+        <div class="section-head"> <!-- L80: cabecera -->
+          <h2>También puedes escribirnos</h2> <!-- L81: título -->
+          <p>Áreas que atienden consultas específicas.</p> <!-- L82: presentación -->
+        </div> <!-- L83: cierra la cabecera -->
+        <div class="info-grid"> <!-- L84: rejilla de áreas -->
+          <div class="info-item"><h3>Secretaría</h3><p>Teléfono 719-7998 para citas y trámites generales.</p></div> <!-- L85: área 1 -->
+          <div class="info-item"><h3>Trabajo Social</h3><p>Teléfono 719-7996 para evaluaciones y apoyo a familias.</p></div> <!-- L86: área 2 -->
+          <div class="info-item"><h3>Informes</h3><p>informes@uoas.org.pe para alianzas y donaciones.</p></div> <!-- L87: área 3 -->
+          <div class="info-item"><h3>Unión de Obras</h3><p>uniondeobras@uoas.org.pe para comunicación institucional.</p></div> <!-- L88: área 4 -->
+          <div class="info-item"><h3>Celular</h3><p>994 265 577 para contacto fuera del horario de oficina.</p></div> <!-- L89: área 5 -->
+          <div class="info-item"><h3>Sedes</h3><p>Consulta la ficha de cada sede desde el menú principal.</p></div> <!-- L90: área 6 -->
+        </div> <!-- L91: cierra la rejilla -->
+      </div> <!-- L92: cierra el contenedor -->
+    </section> <!-- L93: cierra las áreas -->
+
+  </main> <!-- L94: cierra el contenido principal -->
+
+  <!-- L95: PIE DE PÁGINA azul con tres columnas de contacto -->
+  <footer class="site-bottom" id="contacto"> <!-- L96: pie de página -->
+    <div class="container bottom-grid"> <!-- L97: rejilla de contacto -->
+      <div class="bottom-col"> <!-- L98: columna de dirección -->
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg> <!-- L99: icono de ubicación -->
+        <p>Calle Esperanza 250,<br>Miraflores 15074<br>Lima - PERÚ</p> <!-- L100: dirección -->
+      </div> <!-- L101: cierra dirección -->
+      <div class="bottom-col"> <!-- L102: columna de correos -->
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 4h20v16H2V4zm10 9L3.5 6.5v.1L12 13l8.5-6.4V6.5L12 13z"/></svg> <!-- L103: icono de correo -->
+        <p>uniondeobras@uoas.org.pe<br>informes@uoas.org.pe</p> <!-- L104: correos -->
+      </div> <!-- L105: cierra correos -->
+      <div class="bottom-col"> <!-- L106: columna de teléfonos -->
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h4l2 5-2.5 1.5a12 12 0 0 0 6 6L17 12l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 4 4a2 2 0 0 1 2-2z"/></svg> <!-- L107: icono de teléfono -->
+        <p>Secretaría: 719-7998<br>Trabajo Social: 719-7996<br>994 265 577</p> <!-- L108: teléfonos -->
+      </div> <!-- L109: cierra teléfonos -->
+    </div> <!-- L110: cierra la rejilla -->
+    <div class="bottom-bar"> <!-- L111: franja inferior más oscura -->
+      <div class="container bar-inner"> <!-- L112: contenido alineado -->
+        <small>© UNION DE OBRAS DE ASISTENCIA SOCIAL 2026</small> <!-- L113: copyright -->
+        <nav aria-label="Menú del pie"> <!-- L114: menú secundario -->
+          <a href="index.html" data-page-link="inicio">Inicio</a> <!-- L115: enlace -->
+          <a href="nosotros.html" data-page-link="nosotros">Nosotros</a> <!-- L116: enlace -->
+          <a href="sede-escuela-hogar-ancon-de-ninas.html">Sedes</a> <!-- L117: enlace -->
+          <a href="alianzas.html" data-page-link="alianzas">Alianzas</a> <!-- L118: enlace -->
+          <a href="como-ayudar.html" data-page-link="como-ayudar">Cómo Ayudar</a> <!-- L119: enlace -->
+          <a href="galeria.html" data-page-link="galeria">Galería</a> <!-- L120: enlace -->
+          <a href="contacto.html" data-page-link="contacto">Contacto</a> <!-- L121: enlace -->
+        </nav> <!-- L122: cierra el menú del pie -->
+      </div> <!-- L123: cierra el contenido -->
+    </div> <!-- L124: cierra la franja -->
+  </footer> <!-- L125: cierra el pie -->
+
+  <script src="assets/js/main.js"></script> <!-- L126: carga los comportamientos compartidos -->
+</body> <!-- L127: cierra el cuerpo -->
+</html> <!-- L128: cierra el documento -->

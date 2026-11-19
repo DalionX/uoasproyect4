@@ -1,0 +1,122 @@
+<!DOCTYPE html> <!-- L1: declara que el documento usa HTML5 -->
+<html lang="es"> <!-- L2: idioma principal del contenido -->
+<head> <!-- L3: metadatos, no se muestran en la página -->
+  <meta charset="UTF-8"> <!-- L4: codificación de caracteres para tildes y eñes -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- L5: hace el diseño adaptable al celular -->
+  <title>Galería | UOAS</title> <!-- L6: título de la pestaña del navegador -->
+  <meta name="description" content="Copia de estudio de la sección Galería de UOAS."> <!-- L7: descripción para buscadores -->
+  <link rel="icon" href="assets/img/logo-uoas.svg" type="image/svg+xml"> <!-- L8: icono SVG original del clon -->
+  <link rel="stylesheet" href="assets/css/styles.css"> <!-- L9: carga la hoja de estilos compartida -->
+</head> <!-- L10: cierra la cabecera -->
+<body data-page="galeria"> <!-- L11: identifica la página para resaltar el menú -->
+
+  <!-- L12: BARRA SUPERIOR fija, reproduce el header sticky de 80px -->
+  <header class="site-header" id="site-header"> <!-- L13: contenedor semántico de la cabecera -->
+    <div class="container header-inner"> <!-- L14: ancho máximo y centrado -->
+      <a class="brand" href="index.html" aria-label="Inicio UOAS"> <!-- L15: enlace de la marca a la portada -->
+        <img src="assets/img/logo-uoas.svg" alt="Unión de Obras de Asistencia Social" width="396" height="164"> <!-- L16: logo vectorial original -->
+      </a> <!-- L17: cierra la marca -->
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Abrir menú"> <!-- L18: botón de hamburguesa para móvil -->
+        <span></span><span></span><span></span> <!-- L19: tres líneas del icono -->
+      </button> <!-- L20: cierra el botón -->
+      <nav class="main-nav" id="main-nav" aria-label="Menú principal"> <!-- L21: navegación principal -->
+        <ul class="menu"> <!-- L22: lista de enlaces del menú -->
+          <li><a href="index.html" data-page-link="inicio">Inicio</a></li> <!-- L23: enlace a la portada -->
+          <li><a href="nosotros.html" data-page-link="nosotros">Nosotros</a></li> <!-- L24: enlace a nosotros -->
+          <li class="has-submenu"> <!-- L25: ítem con submenú desplegable -->
+            <button class="submenu-toggle" type="button" aria-expanded="false">Sedes <span aria-hidden="true">▾</span></button> <!-- L26: botón que abre el desplegable -->
+            <ul class="submenu"> <!-- L27: lista de sedes -->
+              <li><a href="sede-escuela-hogar-ancon-de-ninas.html" data-page-link="sede-ninas">Escuela Hogar Ancón de Niñas</a></li> <!-- L28: sede 1 -->
+              <li><a href="sede-escuela-hogar-ancon-de-ninos.html" data-page-link="sede-ninos">Escuela Hogar Ancón de Niños</a></li> <!-- L29: sede 2 -->
+              <li><a href="sede-hogar-transitorio-san-luis.html" data-page-link="sede-san-luis">Hogar Transitorio San Luis</a></li> <!-- L30: sede 3 -->
+              <li><a href="sede-cuna-jardin-san-francisco.html" data-page-link="sede-san-francisco">Cuna Jardín San Francisco</a></li> <!-- L31: sede 4 -->
+              <li><a href="sede-cuna-jardin-santa-rosa-04.html" data-page-link="sede-santa-rosa">Cuna Jardin Santa Rosa 04</a></li> <!-- L32: sede 5 -->
+              <li><a href="sede-nido-aurora.html" data-page-link="sede-nido">Nido Aurora</a></li> <!-- L33: sede 6 -->
+              <li><a href="sede-centro-de-atencion-integral-aurora.html" data-page-link="sede-integral">Centro de Atención Integral Aurora</a></li> <!-- L34: sede 7 -->
+            </ul> <!-- L35: cierra el submenú -->
+          </li> <!-- L36: cierra el ítem Sedes -->
+          <li><a href="alianzas.html" data-page-link="alianzas">Alianzas</a></li> <!-- L37: enlace a alianzas -->
+          <li><a href="como-ayudar.html" data-page-link="como-ayudar">Cómo Ayudar</a></li> <!-- L38: enlace a cómo ayudar -->
+          <li><a href="galeria.html" data-page-link="galeria">Galería</a></li> <!-- L39: enlace a esta página -->
+          <li><a href="contacto.html" data-page-link="contacto">Contacto</a></li> <!-- L40: enlace a contacto -->
+        </ul> <!-- L41: cierra la lista del menú -->
+      </nav> <!-- L42: cierra la navegación -->
+    </div> <!-- L43: cierra el contenedor -->
+  </header> <!-- L44: cierra la cabecera -->
+
+  <main> <!-- L45: inicia el contenido principal de la página -->
+    <section class="page-hero"> <!-- L46: cabecera azul con título y resumen -->
+      <div class="container"> <!-- L47: contenido centrado -->
+        <div class="breadcrumb"><a href="index.html">Inicio</a> / Galería</div> <!-- L48: migas de pan -->
+        <h1>Galería</h1> <!-- L49: título de la página -->
+        <p>Álbumes de las sedes y actividades institucionales, ilustrados con fotografías libres.</p> <!-- L50: resumen de la página -->
+        <img class="page-hero-logo" src="assets/img/logo-uoas-blanco.svg" alt="" width="595" height="330"> <!-- L51: logo decorativo translúcido -->
+      </div> <!-- L52: cierra el contenedor -->
+    </section> <!-- L53: cierra la cabecera azul -->
+
+    <section class="section"> <!-- L54: rejilla de álbumes -->
+      <div class="container"> <!-- L55: contenedor general -->
+        <div class="section-head"> <!-- L56: cabecera de la sección -->
+          <h2>Álbumes</h2> <!-- L57: título -->
+          <p>Pulsa cualquier álbum para ampliar su imagen en el visor.</p> <!-- L58: instrucción -->
+        </div> <!-- L59: cierra la cabecera -->
+        <div class="gallery-grid"> <!-- L60: rejilla de siete álbumes -->
+          <div class="gallery-card"> <!-- L61: álbum 1 --> <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80" srcset="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80 800w, https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1400&q=80 1400w" sizes="(max-width: 767px) 100vw, 33vw" loading="lazy" alt="Aula de la Escuela Hogar"> <!-- L62: foto libre --> <div class="gallery-caption"> <!-- L63: leyenda --> <strong>Escuela Hogar Ancón de Niñas</strong> <!-- L64: nombre --> <span>78 fotos</span> <!-- L65: cantidad --> </div> <!-- L66: cierra leyenda --> </div> <!-- L67: cierra álbum 1 -->
+          <div class="gallery-card"> <!-- L68: álbum 2 --> <img src="https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=800&q=80" srcset="https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=800&q=80 800w, https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=1400&q=80 1400w" sizes="(max-width: 767px) 100vw, 33vw" loading="lazy" alt="Niños en el Nido Aurora"> <!-- L69: foto libre --> <div class="gallery-caption"> <!-- L70: leyenda --> <strong>Nido Aurora</strong> <!-- L71: nombre --> <span>47 fotos</span> <!-- L72: cantidad --> </div> <!-- L73: cierra leyenda --> </div> <!-- L74: cierra álbum 2 -->
+          <div class="gallery-card"> <!-- L75: álbum 3 --> <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80" srcset="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80 800w, https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1400&q=80 1400w" sizes="(max-width: 767px) 100vw, 33vw" loading="lazy" alt="Estudiantes de la Escuela Hogar"> <!-- L76: foto libre --> <div class="gallery-caption"> <!-- L77: leyenda --> <strong>Escuela Hogar Ancón de Niños</strong> <!-- L78: nombre --> <span>62 fotos</span> <!-- L79: cantidad --> </div> <!-- L80: cierra leyenda --> </div> <!-- L81: cierra álbum 3 -->
+          <div class="gallery-card"> <!-- L82: álbum 4 --> <img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30?auto=format&fit=crop&w=800&q=80" srcset="https://images.unsplash.com/photo-1596464716127-f2a82984de30?auto=format&fit=crop&w=800&q=80 800w, https://images.unsplash.com/photo-1596464716127-f2a82984de30?auto=format&fit=crop&w=1400&q=80 1400w" sizes="(max-width: 767px) 100vw, 33vw" loading="lazy" alt="Juegos en el Hogar Transitorio"> <!-- L83: foto libre --> <div class="gallery-caption"> <!-- L84: leyenda --> <strong>Hogar Transitorio San Luis</strong> <!-- L85: nombre --> <span>34 fotos</span> <!-- L86: cantidad --> </div> <!-- L87: cierra leyenda --> </div> <!-- L88: cierra álbum 4 -->
+          <div class="gallery-card"> <!-- L89: álbum 5 --> <img src="https://images.unsplash.com/photo-1544776193-352d25ca82cd?auto=format&fit=crop&w=800&q=80" srcset="https://images.unsplash.com/photo-1544776193-352d25ca82cd?auto=format&fit=crop&w=800&q=80 800w, https://images.unsplash.com/photo-1544776193-352d25ca82cd?auto=format&fit=crop&w=1400&q=80 1400w" sizes="(max-width: 767px) 100vw, 33vw" loading="lazy" alt="Actividad en Cuna Jardín"> <!-- L90: foto libre --> <div class="gallery-caption"> <!-- L91: leyenda --> <strong>Cuna Jardín San Francisco</strong> <!-- L92: nombre --> <span>41 fotos</span> <!-- L93: cantidad --> </div> <!-- L94: cierra leyenda --> </div> <!-- L95: cierra álbum 5 -->
+          <div class="gallery-card"> <!-- L96: álbum 6 --> <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=800&q=80" srcset="https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=800&q=80 800w, https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=1400&q=80 1400w" sizes="(max-width: 767px) 100vw, 33vw" loading="lazy" alt="Niña con materiales educativos"> <!-- L97: foto libre --> <div class="gallery-caption"> <!-- L98: leyenda --> <strong>Cuna Jardin Santa Rosa 04</strong> <!-- L99: nombre --> <span>53 fotos</span> <!-- L100: cantidad --> </div> <!-- L101: cierra leyenda --> </div> <!-- L102: cierra álbum 6 -->
+          <div class="gallery-card"> <!-- L103: álbum 7 --> <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80" srcset="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80 800w, https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1400&q=80 1400w" sizes="(max-width: 767px) 100vw, 33vw" loading="lazy" alt="Atención especializada"> <!-- L104: foto libre --> <div class="gallery-caption"> <!-- L105: leyenda --> <strong>Centro de Atención Integral Aurora</strong> <!-- L106: nombre --> <span>29 fotos</span> <!-- L107: cantidad --> </div> <!-- L108: cierra leyenda --> </div> <!-- L109: cierra álbum 7 -->
+        </div> <!-- L110: cierra la rejilla -->
+      </div> <!-- L111: cierra el contenedor -->
+    </section> <!-- L112: cierra los álbumes -->
+
+    <section class="cta-band"> <!-- L113: franja final de llamada a la acción -->
+      <div class="container"> <!-- L114: contenedor centrado -->
+        <h2>Conoce las sedes</h2> <!-- L115: título de la franja -->
+        <a href="nosotros.html">Ver sedes</a> <!-- L116: enlace a la página de nosotros -->
+      </div> <!-- L117: cierra el contenedor -->
+    </section> <!-- L118: cierra la franja -->
+  </main> <!-- L119: cierra el contenido principal -->
+
+  <!-- L120: PIE DE PÁGINA azul con tres columnas de contacto -->
+  <footer class="site-bottom" id="contacto"> <!-- L121: pie de página -->
+    <div class="container bottom-grid"> <!-- L122: rejilla de contacto -->
+      <div class="bottom-col"> <!-- L123: columna de dirección -->
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg> <!-- L124: icono de ubicación -->
+        <p>Calle Esperanza 250,<br>Miraflores 15074<br>Lima - PERÚ</p> <!-- L125: dirección -->
+      </div> <!-- L126: cierra dirección -->
+      <div class="bottom-col"> <!-- L127: columna de correos -->
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 4h20v16H2V4zm10 9L3.5 6.5v.1L12 13l8.5-6.4V6.5L12 13z"/></svg> <!-- L128: icono de correo -->
+        <p>uniondeobras@uoas.org.pe<br>informes@uoas.org.pe</p> <!-- L129: correos -->
+      </div> <!-- L130: cierra correos -->
+      <div class="bottom-col"> <!-- L131: columna de teléfonos -->
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h4l2 5-2.5 1.5a12 12 0 0 0 6 6L17 12l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 4 4a2 2 0 0 1 2-2z"/></svg> <!-- L132: icono de teléfono -->
+        <p>Secretaría: 719-7998<br>Trabajo Social: 719-7996<br>994 265 577</p> <!-- L133: teléfonos -->
+      </div> <!-- L134: cierra teléfonos -->
+    </div> <!-- L135: cierra la rejilla -->
+    <div class="bottom-bar"> <!-- L136: franja inferior más oscura -->
+      <div class="container bar-inner"> <!-- L137: contenido alineado -->
+        <small>© UNION DE OBRAS DE ASISTENCIA SOCIAL 2026</small> <!-- L138: copyright -->
+        <nav aria-label="Menú del pie"> <!-- L139: menú secundario -->
+          <a href="index.html" data-page-link="inicio">Inicio</a> <!-- L140: enlace -->
+          <a href="nosotros.html" data-page-link="nosotros">Nosotros</a> <!-- L141: enlace -->
+          <a href="sede-escuela-hogar-ancon-de-ninas.html">Sedes</a> <!-- L142: enlace -->
+          <a href="alianzas.html" data-page-link="alianzas">Alianzas</a> <!-- L143: enlace -->
+          <a href="como-ayudar.html" data-page-link="como-ayudar">Cómo Ayudar</a> <!-- L144: enlace -->
+          <a href="galeria.html" data-page-link="galeria">Galería</a> <!-- L145: enlace -->
+          <a href="contacto.html" data-page-link="contacto">Contacto</a> <!-- L146: enlace -->
+        </nav> <!-- L147: cierra el menú del pie -->
+      </div> <!-- L148: cierra el contenido -->
+    </div> <!-- L149: cierra la franja -->
+  </footer> <!-- L150: cierra el pie -->
+
+  <div class="modal" id="modal" hidden> <!-- L151: visor de imágenes, oculto al cargar -->
+    <button class="modal-close" id="modal-close" type="button" aria-label="Cerrar">×</button> <!-- L152: botón de cierre -->
+    <img id="modal-image" alt="Vista ampliada del álbum"> <!-- L153: imagen que muestra JavaScript -->
+  </div> <!-- L154: cierra el visor -->
+
+  <script src="assets/js/main.js"></script> <!-- L155: carga los comportamientos compartidos -->
+</body> <!-- L156: cierra el cuerpo -->
+</html> <!-- L157: cierra el documento -->

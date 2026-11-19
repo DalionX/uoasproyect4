@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="utf-8"><title>Generador PDF navegador</title></head>
+<body>
+<p>Generador temporal del DOCUMENTACION.pdf con el modelo visual del PDF de referencia.</p>
+<script>
+/* Puerto a JavaScript de generar_documento.py; conserva paleta, fuentes, margenes y tablas. */
+const NL = "\n";
+const BS = "\\";
+const C = {
+  navy: ".070588 .192157 .352941",
+  blue: ".113725 .305882 .537255",
+  black: "0 0 0",
+  violet: ".541176 .168627 .886275",
+  white: "1 1 1",
+  zebra: ".956863 .968627 .984314",
+  border: ".721569 .768627 .839216"
+};
+const F = { cuerpo: "/F1", titulo: "/F2", codigo: "/F3" };
+const X = 56.69291;
+const ANCHO = 481.8898;
+const ALTO = 790;
+
+function esc(s) {
+  return s.split("\\").join("\\\\").split("(").join("\\(").split(")").join("\\)");
+}
+
+function wrap(s, n) {
+  const salida = [];
+  let actual = "";
+  for (const palabra of s.split(" ")) {
+    const candidata = (actual + " " + palabra).trim();
+    if (candidata.length > n && actual) {
+      salida.push(actual);
+      actual = palabra;
+    } else {
+      actual = candidata;
+    }
+  }
+  if (actual) salida.push(actual);
+  return salida;
+}
+
+class Pagina {
+  constructor() { this.comandos = []; this.y = ALTO; }
+  texto(color, fuente, size, x, y, s) {
+    this.comandos.push(color + " rg " + fuente + " " + size + " Tf 1 0 0 1 " + x + " " + y + " Tm (" + esc(s) + ") Tj");
+  }
+  titulo(s) { this.texto(C.navy, F.titulo, 20, X, this.y, s); this.y -= 30; }
+  seccion(s) { this.y -= 12; this.texto(C.blue, F.titulo, 14, X, this.y, s); this.y -= 24; }
+  cuerpo(s) {
+    for (const linea of wrap(s, 95)) { this.texto(C.black, F.cuerpo, 9.5, X + 13, this.y, linea); this.y -= 13; }
+    this.y -= 4;
+  }
+  lista(s, numero) {
+    const marca = numero ? numero + "." : BS + "225";
+    this.texto(C.black, F.cuerpo, 9.5, X, this.y, marca);
+    const lineas = wrap(s, 88);
+    lineas.forEach((linea, i) => this.texto(C.black, F.cuerpo, 9.5, X + 13, this.y - i * 13, linea));
+    this.y -= 13 * lineas.length + 3;
+  }
+  tabla(cabeceras, filas, anchos, columnasCodigo) {
+    const codigo = columnasCodigo || [];
+    const x = X, altoCabecera = 16, total = ANCHO, top = this.y;
+    this.comandos.push(C.blue + " rg " + x + " " + this.y + " " + total + " " + altoCabecera + " re f");
+    let cx = x + 6;
+    cabeceras.forEach((cabecera, i) => {
+      this.texto(C.white, F.titulo, 8, cx, this.y + 5, cabecera);
+      cx += anchos[i];
+    });
+    this.y -= altoCabecera;
+    const separadores = [this.y];
+    filas.forEach((fila, r) => {
+      const celdas = fila.map((valor, i) => wrap(String(valor), Math.max(1, Math.floor(anchos[i] / 4.3))));
+      const nlineas = Math.max.apply(null, celdas.map(c => c.length));
+      const alto = Math.max(16, 8 + nlineas * 10);
+      const fondo = r % 2 ? C.zebra : C.white;
+      this.comandos.push(fondo + " rg " + x + " " + (this.y - alto) + " " + total + " " + alto + " re f");
+      let cc = x + 6;
+      celdas.forEach((celda, i) => {
+        const color = codigo.indexOf(i) >= 0 ? C.violet : C.black;
+        const fuente = codigo.indexOf(i) >= 0 ? F.codigo : F.cuerpo;
+        celda.forEach((linea, k) => this.texto(color, fuente, 8, cc, this.y - 9 - k * 10, linea));
+        cc += anchos[i];
+      });
+      this.y -= alto;
+      separadores.push(this.y);
+    });
+    this.comandos.push(C.border + " RG .4 w " + x + " " + this.y + " " + total + " " + (top - this.y) + " re S");
+    separadores.slice(1, -1).forEach(sy => this.comandos.push(C.border + " RG .4 w " + x + " " + sy + " m " + (x + total) + " " + sy + " l S"));
+    let cx2 = x;
+    anchos.slice(0, -1).forEach(ancho => {
+      cx2 += ancho;
+      this.comandos.push(C.border + " RG .4 w " + cx2 + " " + this.y + " m " + cx2 + " " + top + " l S");
+    });
+    this.y -= 14;
+  }
+}
+
+function construirPaginas() {
+  const paginas = [];
+
+  let p = new Pagina();
+  p.titulo("DOCUMENTACION - CLON UOAS");
+  p.cuerpo("Copia de estudio de https://www.uoas.org.pe/ | HTML5 + CSS3 + JavaScript puro");
+  p.seccion("1. Que se hizo y con que");
+  p.lista("Origen: se leyo la estructura real del sitio (menu, secciones, textos y enlaces).");
+  p.lista("Tecnologias: HTML5, CSS3 (Grid, Flexbox, variables CSS y media queries) y JavaScript puro.");
+  p.lista("Sin librerias ni frameworks; usa INICIAR_SERVIDOR.bat para los videos de YouTube.");
+  p.lista("Codigo comentado linea a linea con el prefijo L en los tres archivos.");
+  p.lista("Imagenes: fotografias libres de Unsplash y dos logos SVG dibujados para el clon.");
+  p.lista("No se copiaron fotos ni logos originales; los videos se usan con derechos aportados o son archivos locales.");
+  p.lista("Se anadieron 12 paginas internas enlazadas desde el menu y el pie.");
+  p.seccion("1b. Videos, accesibilidad y rendimiento");
+  p.lista("Videos 1 y 2: miniaturas reales; API oficial de YouTube; error 153 se resuelve con INICIAR_SERVIDOR.bat.", 1);
+  p.lista("Video 3: vertical 9:16 en recuadro sin fondos; primer fotograma como portada; play vuelve al terminar.", 2);
+  p.lista("Accesibilidad: saltar al contenido, foco visible, cierre con Escape, sliders pausables y prefers-reduced-motion.", 3);
+  p.lista("Rendimiento: loading lazy, srcset y sizes en 9 fotos de index.html y 7 de galeria.html.", 4);
+  p.lista("Galeria: flechas anterior y siguiente, sin filtros; enlaces internos de las 13 paginas revisados.", 5);
+  p.seccion("2. Mapa de archivos");
+  p.tabla(["Archivo", "Rol", "Contenido"], [
+    ["INICIAR_SERVIDOR.bat", "BAT", "Un clic: abre el sitio en http://localhost:8000."],
+    ["servir_local.py / .js", "PY/JS", "Servidor minimo que da el referidor http que YouTube exige."],
+    ["index.html", "HTML", "Portada con 7 slides, aniversario, videos, mision, historia y pie."],
+    ["nosotros.html", "HTML", "Historia, mision, vision, valores, objetivos y registros."],
+    ["sede-*.html (7)", "HTML", "Fichas de las siete sedes con servicios y datos."],
+    ["alianzas.html", "HTML", "Convenios, entidades aliadas y formas de sumarse."],
+    ["como-ayudar.html", "HTML", "Voluntariado, proyectos, donaciones y auspicio."],
+    ["galeria.html", "HTML", "Siete albumes con visor modal de imagenes."],
+    ["contacto.html", "HTML", "Datos institucionales y formulario de demostracion."],
+    ["assets/css/styles.css", "CSS", "Paleta, formas, rejillas y responsive. 1118 anotaciones L."],
+    ["assets/js/main.js", "JS", "Sliders, menu, videos en linea, API de YouTube y galeria. 227 lineas."],
+    ["assets/img/*.svg", "SVG", "Dos logos originales: cabecera y cabecera azul."],
+    ["DOCUMENTACION.md", "MD", "Indice por bloques, inventario y herramientas."],
+    ["DOCUMENTACION.pdf", "PDF", "Esta guia impresa con el cuadro de programas."]
+  ], [150, 70, 261.89], [0]);
+  paginas.push(p);
+
+  p = new Pagina();
+  p.seccion("3. Inventario de imagenes");
+  p.cuerpo("Fotografias servidas desde images.unsplash.com con ?auto=format&fit=crop&w=...&q=80.");
+  p.tabla(["Imagen", "Tipo", "Donde se usa"], [
+    ["logo-uoas.svg", "SVG propio", "Cabecera (L16) e icono de pestana (L8)."],
+    ["logo-uoas-blanco.svg", "SVG propio", "Hero L51 y las 12 paginas internas L51."],
+    ["photo-1509062522246-3755977927d7", "Unsplash", "Hero 1 y 7; historico 1; Escuela Ninos; album 3."],
+    ["photo-1503676260728-1c00da094a0b", "Unsplash", "Hero 2; historico 2; Nosotros; album 1. Mision ya no usa foto."],
+    ["photo-1491013516836-7db643ee125a", "Unsplash", "Hero 3; historico 3. Video 1 usa miniatura de YouTube."],
+    ["photo-1516627145497-ae6968895b74", "Unsplash", "Slides 2 y 6; Escuela Ninas; album 6. Video 2 usa miniatura de YouTube."],
+    ["photo-1544776193-352d25ca82cd", "Unsplash", "Slides 3 y 7; mision; Cuna San Francisco; album 5."],
+    ["photo-1580582932707-520aed937b7b", "Unsplash", "Slide 4; foto decorativa; historico 6."],
+    ["photo-1571260899304-425eee4c7efc", "Unsplash", "Fondo del hero slide 5."],
+    ["photo-1503454537195-1dcabb73ffb9", "Unsplash", "Slide 4; detalle de la mision."],
+    ["photo-1596464716127-f2a82984de30", "Unsplash", "Slide 5; Hogar Transitorio; album 4."],
+    ["photo-1607453998774-d533f65dac99", "Unsplash", "Hero 6; Cuna Santa Rosa 04."],
+    ["photo-1587654780291-39c9404d746b", "Unsplash", "Nido Aurora y album 2."],
+    ["photo-1576091160399-112ba8d25d1d", "Unsplash", "Centro Integral Aurora y album 7."],
+    ["photo-1559027615-cd4628902d4a", "Unsplash", "Foto de voluntariado en como-ayudar.html."]
+  ], [150, 70, 261.89], [0]);
+  paginas.push(p);
+
+  p = new Pagina();
+  p.seccion("4. Cuadro de programas y herramientas utilizadas");
+  p.tabla(["Programa", "Para que se uso", "Alternativa"], [
+    ["OpenCode + Chromium", "Inspeccionar DOM, estilos y tamanos originales.", "DevTools (F12)"],
+    ["webfetch", "Descargar el HTML y CSS originales y las 12 paginas internas.", "curl / navegador"],
+    ["Visual Studio Code", "Editar HTML, CSS y JavaScript.", "Notepad++, Sublime"],
+    ["HTML5", "Estructura del contenido.", "-"],
+    ["CSS3", "Colores, formas y diseno responsive.", "-"],
+    ["JavaScript DOM", "Sliders, menu movil y modal.", "-"],
+    ["SVG (XML)", "Logos e iconos originales.", "Inkscape"],
+    ["Unsplash", "Fotografias libres de derechos.", "Pexels, Pixabay"],
+    ["Python http.server", "Servir la carpeta por HTTP (opcional).", "Live Server"]
+  ], [150, 231.89, 100], [0]);
+  p.seccion("5. Flujo de trabajo");
+  p.lista("Analizar la web original en el navegador y extraer sus estilos reales.", 1);
+  p.lista("Sustituir fotos por imagenes libres y redibujar los logos en SVG.", 2);
+  p.lista("Escribir HTML, CSS y JS con un comentario por linea.", 3);
+  p.lista("Verificar sliders, menu, modal y vista responsive.", 4);
+  p.lista("Extraer las 12 URLs internas y crear una pagina local para cada una.", 5);
+  p.lista("Conectar menu y pie con rutas reales y anadir estado activo.", 6);
+  p.lista("Comprobar las 13 paginas: sin errores de consola y con enlaces internos.", 7);
+  paginas.push(p);
+
+  p = new Pagina();
+  p.seccion("6. Guia rapida de modificacion");
+  p.tabla(["Quieres cambiar", "Ve a"], [
+    ["Los colores", "styles.css L1-L11"],
+    ["El texto de la mision", "index.html L130"],
+    ["Las fotos del hero", "index.html L49, L54, L63, L72, L81, L90, L99"],
+    ["La velocidad de los sliders", "index.html L46 (5000) y L150 (4000)"],
+    ["El listado de sedes", "index.html L28-L34 y L170-L176"],
+    ["El pie de pagina", "index.html L181-L211 / styles.css L472-L525"],
+    ["El diseno en movil", "styles.css L552-L627"],
+    ["El logo", "Editar los dos SVG de assets/img/"],
+    ["Los textos internos", "nosotros.html L54-L162 / sede-*.html L49-L119"],
+    ["Los convenios", "alianzas.html L68-L123"],
+    ["Las formas de ayuda", "como-ayudar.html L64-L119"],
+    ["Los albumes", "galeria.html L60-L110"],
+    ["El formulario", "contacto.html L62-L74 / main.js L119-L135"],
+    ["Paginas internas", "styles.css L628-L1058"],
+    ["Los tres videos en linea", "index.html L117-L135 / main.js L81b-L100i / L157-L165"]
+  ], [200, 281.89], [1]);
+  p.seccion("7. Aviso");
+  p.cuerpo("Este clon se realizo con fines de estudio y practica. No copia fotos ni logos originales. Los dos videos de YouTube se usan con derechos de la institucion y el vertical es un archivo local aportado. Para publicarlo, sustituye los contenidos por propios o solicita autorizacion.");
+  paginas.push(p);
+  return paginas;
+}
+
+function construirPdf(paginas) {
+  const objetos = [];
+  function add(s) { objetos.push(s); return objetos.length; }
+  add("<< /Type /Catalog /Pages 2 0 R >>");
+  add("<< /Type /Pages /Kids [] /Count 0 >>");
+  add("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>");
+  add("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>");
+  add("<< /Type /Font /Subtype /Type1 /BaseFont /Courier /Encoding /WinAnsiEncoding >>");
+  const numeros = [];
+  for (const pagina of paginas) {
+    const contenido = pagina.comandos.join(NL) + NL;
+    const nc = add("<< /Length " + contenido.length + " >>" + NL + "stream" + NL + contenido + "endstream");
+    const np = add("<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.2756 841.8898] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents " + nc + " 0 R >>");
+    numeros.push(np);
+  }
+  objetos[1] = "<< /Type /Pages /Kids [" + numeros.map(n => n + " 0 R").join(" ") + "] /Count " + numeros.length + " >>";
+  let pdf = "%PDF-1.4" + NL;
+  const off = [0];
+  objetos.forEach((obj, i) => {
+    off.push(pdf.length);
+    pdf += (i + 1) + " 0 obj" + NL + obj + NL + "endobj" + NL;
+  });
+  const xref = pdf.length;
+  pdf += "xref" + NL + "0 " + (objetos.length + 1) + NL + "0000000000 65535 f " + NL;
+  off.slice(1).forEach(o => { pdf += String(o).padStart(10, "0") + " 00000 n " + NL; });
+  pdf += "trailer" + NL + "<< /Size " + (objetos.length + 1) + " /Root 1 0 R >>" + NL + "startxref" + NL + xref + NL + "%%EOF";
+  return pdf;
+}
+
+window.generarPDF = function () { return construirPdf(construirPaginas()); };
+</script>
+</body>
+</html>
